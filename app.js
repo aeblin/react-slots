@@ -1,14 +1,14 @@
 // The SlotMachine React class handles the entirety of this very small app.
 var SlotMachine = React.createClass({
 
-  // Generates random initial state for slots.
-  getInitialState: function() {
-    return {slotPositions: [genSlotValue(), genSlotValue(), genSlotValue()]};
-  },
-
   // Generates random landing values for slots using genSlotValue defined at the end of the file
   getRandomState: function() {
     return [genSlotValue(), genSlotValue(), genSlotValue()];
+  },
+
+  // Generates random initial state for slots.
+  getInitialState: function() {
+    return {slotPositions: this.getRandomState()};
   },
 
   handleButtonClick: function() {
@@ -64,8 +64,9 @@ var SlotMachine = React.createClass({
 
     // Make sure we're only displaying the win state on final slot positions
     if(isWinning && this.state.isFinal){
-      winner = [<div class="col-md-12"><h2>You've won a cup of coffee!</h2></div>, <div class="col-md-12"><h2>You've won a cup of tea!</h2></div>, <div class="col-md-12"><h2>You've won an espresso!</h2></div>][sp[0]];
+      winner = [<div class="col-md-8"><h2>You've won a cup of coffee!</h2></div>, <div class="col-md-8"><h2>You've won a cup of tea!</h2></div>, <div class="col-md-8"><h2>You've won an espresso!</h2></div>][sp[0]];
       winnerClass = [" coffee", " tea", " espresso"][sp[0]];
+      //winnerImage = [<div class="col-md-4">]
     }
 
     // Render Machine
