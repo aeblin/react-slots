@@ -88,3 +88,9 @@ body {
       background-color: rgba(230, 70, 20, 0.75); }
     .spin .spin-button:active {
       background-color: #e64614; }
+
+/* Win Status */
+.win {
+  text-align: center; }
+  .win h2 {
+    font: 400 3.5em/0.85em Abril Fatface; }

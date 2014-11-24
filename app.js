@@ -28,6 +28,11 @@ var SlotMachine = React.createClass({
         if (count < 9 || currentState[i] != finalState[i]) {
           nextState[i] = (currentState[i]+1)%3;
           hasChanged = true;
+          $('.spin-button').prop('disabled', true).text("Spinning!").addClass("btn-disabled");
+        }
+        //Re-enable spin button
+        if (count > 9){
+          $('.spin-button').prop('disabled', false).text("Spin!").removeClass("btn-disabled");
         }
       }
 
@@ -39,9 +44,10 @@ var SlotMachine = React.createClass({
         return; 
       }
       currentState = this.state.slotPositions;
-      setTimeout(makeSpin, 175); 
+      setTimeout(makeSpin, 100); 
       count++; 
     }.bind(this);
+
 
     // Actually spin
     makeSpin();
@@ -58,7 +64,7 @@ var SlotMachine = React.createClass({
 
     // Make sure we're only displaying the win state on final slot positions
     if(isWinning && this.state.isFinal){
-      winner = [<h2>You've won a cup of coffee!</h2>, <h2>You've won a cup of tea!</h2>, <h2>You've won an espresso!</h2>][sp[0]];
+      winner = [<div class="col-md-12"><h2>You've won a cup of coffee!</h2></div>, <div class="col-md-12"><h2>You've won a cup of tea!</h2></div>, <div class="col-md-12"><h2>You've won an espresso!</h2></div>][sp[0]];
       winnerClass = [" coffee", " tea", " espresso"][sp[0]];
     }
 
