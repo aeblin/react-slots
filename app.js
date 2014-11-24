@@ -124,8 +124,10 @@ var SpinButton = React.createClass({
 // StatusMessage is where success messages are output
 var StatusMessage = React.createClass({
   render: function(){
-    // This is some jQuery to make winning more exciting
-    $('body').addClass(this.props.winnerClass, 1000);
+    // This is some jQuery to make winning more exciting by adding some neat body classes 
+    // Revisit if there's time
+    // $('body').addClass(this.props.winnerClass);
+    
     return (
       <div className={"col-md-12" + this.props.winnerClass}>
         <h2>{this.props.winner}</h2>
