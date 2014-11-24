@@ -97,12 +97,19 @@ body {
   text-align: center; }
   .win h2 {
     font: 400 3.5em/0.85em Abril Fatface; }
+  .win .tossing {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto; }
   .win #coffee-img {
-    background: url("../images/coffee.png") no-repeat center; }
+    background: url("../images/coffee.png") no-repeat center;
+    background-size: contain; }
   .win #tea-img {
-    background: url("../images/tea.png") no-repeat center; }
+    background: url("../images/tea.png") no-repeat center;
+    background-size: contain; }
   .win #espresso-img {
-    background: url("../images/espresso.png") no-repeat center; }
+    background: url("../images/espresso.png") no-repeat center;
+    background-size: contain; }
 
 /* tossing animation */
 .tossing {

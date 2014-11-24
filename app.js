@@ -67,7 +67,7 @@ var SlotMachine = React.createClass({
     if(isWinning && this.state.isFinal){
       winner = [<h2>You've won a cup of coffee!</h2>, <h2>You've won a cup of tea!</h2>, <h2>You've won an espresso!</h2>][sp[0]];
       winnerClass = [" coffee", " tea", " espresso"][sp[0]];
-      winnerImage = [<div id="coffee-img" className="tossing"></div>, <div id="tea-img" className="tossing"></div>, <div id="espresso-img" className="tossing"></div>][sp[0]];
+      winnerImage = [<div id="coffee-img" className="tossing win-img"></div>, <div id="tea-img" className="tossing win-img"></div>, <div id="espresso-img" className="tossing win-img"></div>][sp[0]];
     }
 
     // Render Machine
@@ -80,7 +80,7 @@ var SlotMachine = React.createClass({
           </div>
         </section>
         <section className="win row">
-          <StatusMessage winner={winner} winnerClass={winnerClass} />
+          <StatusMessage winner={winner} winnerClass={winnerClass} winnerImage={winnerImage} />
         </section>
       </main>
     );
@@ -134,11 +134,11 @@ var StatusMessage = React.createClass({
   render: function(){
     return (
       <div className={"row" + this.props.winnerClass}>
-        <div className="col-md-4">
-          {this.props.winnerImage}
-        </div>
-        <div className="col-md-8">
+        <div className="col-md-12">
           {this.props.winner}
+        </div>
+        <div className="col-md-12">
+          {this.props.winnerImage}
         </div>
       </div>
     )
