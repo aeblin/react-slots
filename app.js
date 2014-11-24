@@ -1,12 +1,9 @@
 //This is the container for the slot machine (probably only one of these)
 var SlotMachine = React.createClass({
   getInitialState: function() {
-    return {slotPositions: [0,1,2]};
+    return {slotPositions: [genSlotValue(),genSlotValue(),genSlotValue()]};
   },
   handleButtonClick: function() {
-    function genSlotValue(){
-      return Math.floor(Math.random() * (3));
-    }
     //Set count to 0 before each button press
     var count = 0;
     //YOUR DENSITY
@@ -17,27 +14,23 @@ var SlotMachine = React.createClass({
       var nextState = currentState;
       var hasChanged = false;
       //Evaluate whether or not slots are on their final destination
-      if(count < 9 || currentState[0] != finalState[0]){
-        nextState[0] = (currentState[0]+1)%3;
-        hasChanged = true;
-      }if(count < 9 || currentState[1] != finalState[1]){
-        nextState[1] = (currentState[1]+1)%3;
-        hasChanged = true;
-      }if(count < 9 || currentState[2] != finalState[2]){
-        nextState[2] = (currentState[2]+1)%3;
-        hasChanged = true;
+      for(var i = 0; i < 3; i++){
+        if (count < 9 || currentState[i] != finalState[i]) {
+          nextState[i] = (currentState[i]+1)%3;
+          hasChanged = true;
+        }
       }
-      
+      console.log(currentState);
+      console.log(nextState);
+      //This moves reel to the next assigned state if it's not yet on it's final value.
+      this.setState({slotPositions: nextState, isFinal: !hasChanged})
+      //Stops reel spinning if we've hit the final state's value
       if(!hasChanged) {
         return; 
       }
-      this.setState({slotPositions: nextState})
-      //if(count < 10) { setTimeout(makeSpin, 250); count++; console.log(this.state.slotPositions) }
 
       setTimeout(makeSpin, 250); 
       count++; 
-      console.log(this.state.slotPositions)
-      //After (count >= 10) {this.setState({slotPositions: [()]})}
     }.bind(this);
     //Actually spin
     makeSpin();
@@ -46,8 +39,10 @@ var SlotMachine = React.createClass({
     //Define winning states
     var sp = this.state.slotPositions;
     var isWinning = (sp[0] == sp[1]) && (sp[1] == sp[2]);
+    console.log(isWinning);
     var winner = ""; 
-    if(isWinning){
+    //Make sure we're only displaying the win state on final slot positions
+    if(isWinning && this.state.isFinal){
       winner = ["You won coffee!", "You won tea!", "You won espresso!"][sp[0]];
     }
 
@@ -121,3 +116,7 @@ React.render(
   <SlotMachine />,
   document.getElementById('content')
 );
+//Generates a random slot value.
+function genSlotValue(){
+  return Math.floor(Math.random() * 3);
+}
