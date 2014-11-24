@@ -1,16 +1,21 @@
 //This is the container for the slot machine (probably only one of these)
 var SlotMachine = React.createClass({
   getInitialState: function() {
-    return {slotPositions: [genSlotValue(),genSlotValue(),genSlotValue()]};
+    return {slotPositions: [genSlotValue(), genSlotValue(), genSlotValue()]};
+  },
+  getRandomState: function() {
+    return [genSlotValue(), genSlotValue(), genSlotValue()];
   },
   handleButtonClick: function() {
     //Set count to 0 before each button press
     var count = 0;
-    //YOUR DENSITY
-    var finalState = [genSlotValue(), genSlotValue(), genSlotValue() ];
+    //Set a random state as the final state of all slots before we start spinning
+    var finalState = this.getRandomState();
+    //Make sure we start with a fresh state for all slots on each spin
+    //this.setState({slotPositions: this.getRandomState()})
+    var currentState = this.getRandomState();
     //Spinning happens here
     var makeSpin = function(){
-      var currentState = this.state.slotPositions;
       var nextState = currentState;
       var hasChanged = false;
       //Evaluate whether or not slots are on their final destination
@@ -28,7 +33,7 @@ var SlotMachine = React.createClass({
       if(!hasChanged) {
         return; 
       }
-
+      currentState = this.state.slotPositions;
       setTimeout(makeSpin, 250); 
       count++; 
     }.bind(this);
@@ -39,14 +44,17 @@ var SlotMachine = React.createClass({
     //Define winning states
     var sp = this.state.slotPositions;
     var isWinning = (sp[0] == sp[1]) && (sp[1] == sp[2]);
-    console.log(isWinning);
+
+    //Make sure winner and winnerClass strings are undefined until there's an actual win
     var winner = ""; 
+    var winnerClass = "";
     //Make sure we're only displaying the win state on final slot positions
     if(isWinning && this.state.isFinal){
       winner = ["You won coffee!", "You won tea!", "You won espresso!"][sp[0]];
+      winnerClass = [" coffee", " tea", " espresso"][sp[0]];
     }
 
-    //Render 
+    //Render Machine
     return (
       <div>
         <div className="machine row">
@@ -56,7 +64,7 @@ var SlotMachine = React.createClass({
           </div>
         </div>
         <div className="win row">
-          <StatusMessage winner={winner} />
+          <StatusMessage winner={winner} winnerClass={winnerClass} />
         </div>
       </div>
     );
@@ -105,9 +113,11 @@ var SpinButton = React.createClass({
 //Creates Win Div
 var StatusMessage = React.createClass({
   render: function(){
+    //This is some jQuery to make winning more exciting
+    $('body').addClass(this.props.winnerClass, 1000);
     return (
-      <div className="col-md-12">
-        {this.props.winner}
+      <div className={"col-md-12" + this.props.winnerClass}>
+        <h2>{this.props.winner}</h2>
       </div>
     )
   }
