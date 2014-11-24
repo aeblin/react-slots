@@ -58,7 +58,7 @@ var SlotMachine = React.createClass({
 
     // Make sure we're only displaying the win state on final slot positions
     if(isWinning && this.state.isFinal){
-      winner = ["You won a cup of coffee!", "You won a cup of tea!", "You won an espresso!"][sp[0]];
+      winner = ["You've won a cup of coffee!", "You've won a cup of tea!", "You've won an espresso!"][sp[0]];
       winnerClass = [" coffee", " tea", " espresso"][sp[0]];
     }
 
