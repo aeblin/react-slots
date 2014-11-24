@@ -39,7 +39,7 @@ var SlotMachine = React.createClass({
         return; 
       }
       currentState = this.state.slotPositions;
-      setTimeout(makeSpin, 250); 
+      setTimeout(makeSpin, 175); 
       count++; 
     }.bind(this);
 
@@ -58,7 +58,7 @@ var SlotMachine = React.createClass({
 
     // Make sure we're only displaying the win state on final slot positions
     if(isWinning && this.state.isFinal){
-      winner = ["You've won a cup of coffee!", "You've won a cup of tea!", "You've won an espresso!"][sp[0]];
+      winner = [<h2>You've won a cup of coffee!</h2>, <h2>You've won a cup of tea!</h2>, <h2>You've won an espresso!</h2>][sp[0]];
       winnerClass = [" coffee", " tea", " espresso"][sp[0]];
     }
 
@@ -130,7 +130,7 @@ var StatusMessage = React.createClass({
     
     return (
       <div className={"col-md-12" + this.props.winnerClass}>
-        <h2>{this.props.winner}</h2>
+        {this.props.winner}
       </div>
     )
   }
