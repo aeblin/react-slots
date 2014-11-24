@@ -1,8 +1,10 @@
 //This is the container for the slot machine (probably only one of these)
 var SlotMachine = React.createClass({
+  //Generates random initial state for slots.
   getInitialState: function() {
     return {slotPositions: [genSlotValue(), genSlotValue(), genSlotValue()]};
   },
+  //Generates random landing values for slots
   getRandomState: function() {
     return [genSlotValue(), genSlotValue(), genSlotValue()];
   },
@@ -12,12 +14,12 @@ var SlotMachine = React.createClass({
     //Set a random state as the final state of all slots before we start spinning
     var finalState = this.getRandomState();
     //Make sure we start with a fresh state for all slots on each spin
-    //this.setState({slotPositions: this.getRandomState()})
     var currentState = this.getRandomState();
     //Spinning happens here
     var makeSpin = function(){
       var nextState = currentState;
       var hasChanged = false;
+
       //Evaluate whether or not slots are on their final destination
       for(var i = 0; i < 3; i++){
         if (count < 9 || currentState[i] != finalState[i]) {
@@ -25,10 +27,10 @@ var SlotMachine = React.createClass({
           hasChanged = true;
         }
       }
-      console.log(currentState);
-      console.log(nextState);
+
       //This moves reel to the next assigned state if it's not yet on it's final value.
       this.setState({slotPositions: nextState, isFinal: !hasChanged})
+
       //Stops reel spinning if we've hit the final state's value
       if(!hasChanged) {
         return; 
@@ -37,6 +39,7 @@ var SlotMachine = React.createClass({
       setTimeout(makeSpin, 250); 
       count++; 
     }.bind(this);
+
     //Actually spin
     makeSpin();
   },
@@ -48,6 +51,7 @@ var SlotMachine = React.createClass({
     //Make sure winner and winnerClass strings are undefined until there's an actual win
     var winner = ""; 
     var winnerClass = "";
+
     //Make sure we're only displaying the win state on final slot positions
     if(isWinning && this.state.isFinal){
       winner = ["You won coffee!", "You won tea!", "You won espresso!"][sp[0]];
@@ -56,17 +60,17 @@ var SlotMachine = React.createClass({
 
     //Render Machine
     return (
-      <div>
-        <div className="machine row">
+      <main className="react-slots">
+        <section className="machine">
           <Slots slotPositions={this.state.slotPositions} />
           <div className="spin row">
             <SpinButton onButtonClick={this.handleButtonClick} />
           </div>
-        </div>
-        <div className="win row">
+        </section>
+        <section className="win row">
           <StatusMessage winner={winner} winnerClass={winnerClass} />
-        </div>
-      </div>
+        </section>
+      </main>
     );
   }
 });
@@ -86,7 +90,7 @@ var Slots = React.createClass({
 var Slot = React.createClass({
   render: function() {
     return (
-      <div className="col-xs-4">
+      <div className="col-md-4">
         <div className="slot-reel"> 
           <div className={"slot slot-"+this.props.slotIndex+" position-"+this.props.slotPositions}>
           </div>
@@ -102,10 +106,8 @@ var SpinButton = React.createClass({
   },
   render: function(){
     return (
-      <div className="col-md-4 col-md-offset-4" onClick={this.handleClick} >
-        <div className="spin-button">
-          Spin!
-        </div>
+      <div className="col-md-4 col-md-offset-4">
+        <button className="spin-button" onClick={this.handleClick}>Spin!</button>
       </div>
     );
   }

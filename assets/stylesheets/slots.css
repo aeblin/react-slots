@@ -3,22 +3,23 @@ body {
   background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05)); }
 
 .machine {
-  margin-top: 15%; }
+  margin-top: 5em; }
 
-.slot-reel {
+.slot-container .slot-reel {
   text-align: center;
   border: 3px solid #e5bd17;
   height: 250px;
   width: auto;
   overflow: hidden; }
+  @media (max-width: 990px) {
+    .slot-container .slot-reel {
+      margin-top: 2em;
+      height: 235px; } }
 
-.slide, .slot-one, .slot-two, .slot-three {
+.slot {
   background-size: cover;
   background-repeat: repeat-y;
-  height: 250px; }
-
-/* Slot Styles */
-.slot {
+  height: 250px;
   -webkit-transition: background-position 175ms ease;
   transition: background-position 175ms ease; }
 
@@ -31,15 +32,21 @@ body {
 .slot-three {
   background-image: url("../images/slot3.png"); }
 
-/* Slide Positions */
+/* Slide Positions - Media Queries to give slight responsive fix */
 .position-0 {
   background-position: 0% 0%; }
 
 .position-1 {
   background-position: 0% 50%; }
+  @media (max-width: 990px) {
+    .position-1 {
+      background-position: 0% 52%; } }
 
 .position-2 {
   background-position: 0% 100%; }
+  @media (max-width: 990px) {
+    .position-2 {
+      background-position: 0% 103%; } }
 
 /* Spin Button */
 .spin {
@@ -47,10 +54,16 @@ body {
 
 .spin-button {
   padding: 1em;
+  width: 100%;
+  background-color: rgba(230, 70, 20, 0.85);
+  border: 2px solid rgba(230, 70, 20, 0.95);
+  color: rgba(255, 255, 255, 0.75);
   text-align: center;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.75);
-  background-color: rgba(230, 70, 20, 0.85);
-  border: 2px solid rgba(230, 70, 20, 0.95); }
+  -webkit-transition: background-color 250ms ease-in-out;
+  transition: background-color 250ms ease-in-out; }
   .spin-button:hover {
+    cursor: pointer;
     background-color: rgba(230, 70, 20, 0.75); }
+  .spin-button:active {
+    background-color: #e64614; }
