@@ -7,7 +7,15 @@ var SlotMachine = React.createClass({
     function genSlotValue(){
       return Math.floor(Math.random() * (3));
     }
-    this.setState({slotPosition: [genSlotValue(), genSlotValue(), genSlotValue() ]})
+    //Set count to 0 before each button press
+    var count = 0;
+    var makeSpin = function(){
+      this.setState({slotPosition: [genSlotValue(), genSlotValue(), genSlotValue() ]})
+      //Spin 10 times
+      if(count < 10) { setTimeout(makeSpin, 250); count++; }
+    }.bind(this);
+    //Actually spin
+    makeSpin();
   },
   render: function() {
     //Define winning states
@@ -48,30 +56,24 @@ var Slots = React.createClass({
 });
 //Creates each slot
 //Make h2 an image 
-var SlotOne = React.createClass({
+var Slot = React.createClass({
   render: function() {
     return (
       <div className="col-xs-4">
-        <div className={"slot slot-" + this.props.slotIndex}>
-          <div className="slide">
-          </div>
-          <div className="slide">
-          </div>
-          <div className="slide">
+        <div className="slot-reel"> 
+          <div className={"slot slot-"+this.props.slotIndex+" position-"+this.props.slotPosition}>
+            <div className="slide-one">
+            </div>
+            <div className="slide-two">
+            </div>
+            <div className="slide-three">
+            </div>
           </div>
         </div>
       </div>
     );
   }
 }) 
-var SlotTwo = React.createClass({
-  render: function() {
-    return(
-      <div className="col-xs-4">
-      </div>
-    )
-  }
-})
 //Creates Spin Button
 var SpinButton = React.createClass({
   handleClick: function(event){

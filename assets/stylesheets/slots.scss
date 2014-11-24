@@ -1,0 +1,86 @@
+.machine {
+  margin-top: 15%;
+}
+.slot-reel {
+  text-align: center;
+  border: 3px solid #e5bd17;
+  height: 250px;
+  width: auto;
+  overflow: hidden;
+}
+.slide {
+  background-size: cover;
+  height: 250px;
+}
+/* Slot Styles */
+.slot {
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+}
+.slot-one {
+  .slide-one{
+    @extend .slide;
+    background-image: url("../images/slot1-slide1.png");
+  }
+  .slide-two{
+    @extend .slide;
+    background-image: url("../images/slot1-slide2.png");
+  }
+  .slide-three{
+    @extend .slide;
+    background-image: url("../images/slot1-slide3.png");
+  }
+}
+.slot-two {
+  .slide-one{
+    @extend .slide;
+    background-image: url("../images/slot2-slide1.png");
+  }
+  .slide-two{
+    @extend .slide;
+    background-image: url("../images/slot2-slide2.png");
+  }
+  .slide-three{
+    @extend .slide;
+    background-image: url("../images/slot2-slide3.png");
+  }
+}
+.slot-three { 
+  .slide-one{
+    @extend .slide;
+    background-image: url("../images/slot3-slide1.png");
+  }
+  .slide-two{
+    @extend .slide;
+     background-image: url("../images/slot3-slide2.png");
+  }
+  .slide-three{
+    @extend .slide;
+    background-image: url("../images/slot3-slide3.png");
+  }
+}
+/* Slide Positions */
+.position-0 {
+  margin-top: 0%
+}
+.position-1 {
+  margin-top: -70%;
+}
+.position-2 {
+  margin-top: -138%;
+}
+/* Spin Button */
+.spin{
+  margin-top: 2em;
+}
+.spin-button {
+  padding: 1em;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  background-color: rgba(230,70,20,0.85);
+  border: 2px solid rgba(230,70,20,0.95);
+  &:hover {
+    background-color: rgba(230,70,20,0.75);
+  }
+}
