@@ -5,6 +5,8 @@ body {
 .machine {
   margin-top: 5em;
 }
+
+/* Slot Styles */
 .slot-container {
   .slot-reel {
     text-align: center;
@@ -18,24 +20,24 @@ body {
       height: 235px;
     }
   }
+  .slot {
+    background-size: cover;
+    background-repeat: repeat-y;
+    height: 250px;
+    -webkit-transition: background-position 175ms ease;
+    transition: background-position 175ms ease;
+  }
+  .slot-one{
+    background-image: url("../images/slot1.png");
+  }
+  .slot-two{
+    background-image: url("../images/slot2.png");
+  }
+  .slot-three{
+    background-image: url("../images/slot3.png");
+  }
+}
 
-}
-.slot {
-  background-size: cover;
-  background-repeat: repeat-y;
-  height: 250px;
-  -webkit-transition: background-position 175ms ease;
-  transition: background-position 175ms ease;
-}
-.slot-one{
-  background-image: url("../images/slot1.png");
-}
-.slot-two{
-  background-image: url("../images/slot2.png");
-}
-.slot-three{
-  background-image: url("../images/slot3.png");
-}
 /* Slide Positions - Media Queries to give slight responsive fix */
 .position-0 {
   background-position: 0% 0%;
@@ -52,25 +54,26 @@ body {
     background-position: 0% 103%;
   }
 }
+
 /* Spin Button */
-.spin{
+.spin {
   margin-top: 2em;
-}
-.spin-button {
-  padding: 1em;
-  width: 100%;
-  background-color: rgba(230,70,20,0.85);
-  border: 2px solid rgba(230,70,20,0.95);
-  color: rgba(255,255,255,0.75);
-  text-align: center;
-  text-transform: uppercase;
-  -webkit-transition: background-color 250ms ease-in-out;
-  transition: background-color 250ms ease-in-out;
-  &:hover {
-    cursor: pointer;
-    background-color: rgba(230,70,20,0.75);
-  }
-  &:active {
-    background-color: rgba(230,70,20,1);
+  .spin-button {
+    padding: 1em;
+    width: 100%;
+    background-color: rgba(230,70,20,0.85);
+    border: 2px solid rgba(230,70,20,0.95);
+    color: rgba(255,255,255,0.75);
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-transition: background-color 250ms ease-in-out;
+    transition: background-color 250ms ease-in-out;
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(230,70,20,0.75);
+    }
+    &:active {
+      background-color: rgba(230,70,20,1);
+    }
   }
 }
