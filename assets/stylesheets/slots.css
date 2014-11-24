@@ -88,9 +88,47 @@ body {
       background-color: rgba(230, 70, 20, 0.75); }
     .spin .spin-button:active {
       background-color: #e64614; }
+  .spin .spinning {
+    color: #FFFFFF;
+    background-color: #e64614; }
 
 /* Win Status */
 .win {
   text-align: center; }
   .win h2 {
     font: 400 3.5em/0.85em Abril Fatface; }
+  .win #coffee-img {
+    background: url("../images/coffee.png") no-repeat center; }
+  .win #tea-img {
+    background: url("../images/tea.png") no-repeat center; }
+  .win #espresso-img {
+    background: url("../images/espresso.png") no-repeat center; }
+
+/* tossing animation */
+.tossing {
+  animation-name: tossing;
+  -webkit-animation-name: tossing;
+  animation-duration: 2.25s;
+  -webkit-animation-duration: 2.25s;
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite; }
+
+@keyframes tossing {
+  0% {
+    transform: rotate(-4deg); }
+
+  50% {
+    transform: rotate(4deg); }
+
+  100% {
+    transform: rotate(-4deg); } }
+
+@-webkit-keyframes tossing {
+  0% {
+    -webkit-transform: rotate(-4deg); }
+
+  50% {
+    -webkit-transform: rotate(4deg); }
+
+  100% {
+    -webkit-transform: rotate(-4deg); } }
