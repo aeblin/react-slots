@@ -1,6 +1,28 @@
+/* Typography */
+/* Colors */
 body {
-  background-color: #e6e6e6;
-  background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05)); }
+  background-color: #dde3e7;
+  /* Type Concerns */
+  font-family: "Open Sans", "Abril Fatface", "Arial";
+  font-weight: 300;
+  /* h1-h5 */ }
+  body ::selection {
+    background: rgba(30, 80, 120, 0.8);
+    color: white; }
+  body h1,
+  body h2,
+  body h3,
+  body h4,
+  body h5 {
+    font-weight: 600; }
+
+.header-desc h1 {
+  color: #161b23;
+  font: 400 4.5em/0.85em "Abril Fatface"; }
+.header-desc h2 {
+  color: #8597b3;
+  font: 300 1.25em/1.75em "Open Sans";
+  margin: 0px 0px 10px 5px; }
 
 .machine {
   margin-top: 5em; }
@@ -8,7 +30,7 @@ body {
 /* Slot Styles */
 .slot-container .slot-reel {
   text-align: center;
-  border: 3px solid #e5bd17;
+  border: 5px solid #e5bd17;
   height: 250px;
   width: auto;
   overflow: hidden; }
@@ -49,11 +71,14 @@ body {
 .spin {
   margin-top: 2em; }
   .spin .spin-button {
-    padding: 1em;
+    /* Color & Padding for Spin Button */
+    padding: .5em;
     width: 100%;
     background-color: rgba(230, 70, 20, 0.85);
     border: 2px solid rgba(230, 70, 20, 0.95);
     color: rgba(255, 255, 255, 0.75);
+    /* Typography Concerns for Spin Button */
+    font: 600 2.75em Open Sans;
     text-align: center;
     text-transform: uppercase;
     -webkit-transition: background-color 250ms ease-in-out;
@@ -63,3 +88,47 @@ body {
       background-color: rgba(230, 70, 20, 0.75); }
     .spin .spin-button:active {
       background-color: #e64614; }
+  .spin .spinning {
+    color: #FFFFFF;
+    background-color: #e64614; }
+
+/* Win Status */
+.win {
+  text-align: center; }
+  .win h2 {
+    font: 400 3.5em/0.85em Abril Fatface; }
+  .win #coffee-img {
+    background: url("../images/coffee.png") no-repeat center; }
+  .win #tea-img {
+    background: url("../images/tea.png") no-repeat center; }
+  .win #espresso-img {
+    background: url("../images/espresso.png") no-repeat center; }
+
+/* tossing animation */
+.tossing {
+  animation-name: tossing;
+  -webkit-animation-name: tossing;
+  animation-duration: 2.25s;
+  -webkit-animation-duration: 2.25s;
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite; }
+
+@keyframes tossing {
+  0% {
+    transform: rotate(-4deg); }
+
+  50% {
+    transform: rotate(4deg); }
+
+  100% {
+    transform: rotate(-4deg); } }
+
+@-webkit-keyframes tossing {
+  0% {
+    -webkit-transform: rotate(-4deg); }
+
+  50% {
+    -webkit-transform: rotate(4deg); }
+
+  100% {
+    -webkit-transform: rotate(-4deg); } }

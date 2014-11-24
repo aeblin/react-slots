@@ -1,14 +1,14 @@
 // The SlotMachine React class handles the entirety of this very small app.
 var SlotMachine = React.createClass({
 
-  // Generates random initial state for slots.
-  getInitialState: function() {
-    return {slotPositions: [genSlotValue(), genSlotValue(), genSlotValue()]};
-  },
-
   // Generates random landing values for slots using genSlotValue defined at the end of the file
   getRandomState: function() {
     return [genSlotValue(), genSlotValue(), genSlotValue()];
+  },
+
+  // Generates random initial state for slots.
+  getInitialState: function() {
+    return {slotPositions: this.getRandomState()};
   },
 
   handleButtonClick: function() {
@@ -23,15 +23,20 @@ var SlotMachine = React.createClass({
       var nextState = currentState;
       var hasChanged = false;
 
-      // Evaluate whether or not slots are on their final destination
+      // Evaluate whether or not slots are on their final destination, spin to nextState if not
       for(var i = 0; i < 3; i++){
         if (count < 9 || currentState[i] != finalState[i]) {
           nextState[i] = (currentState[i]+1)%3;
           hasChanged = true;
+          $('.spin-button').prop('disabled', true).text("Spinning!").addClass("spinning");
+        }
+        //Re-enable spin button
+        if (count >= 9){
+          $('.spin-button').prop('disabled', false).text("Spin!").removeClass("spinning");
         }
       }
 
-      // This moves reel to the next assigned state if it's not yet on it's final value.
+      // Moves reel to the next assigned state if it's not yet on it's final value.
       this.setState({slotPositions: nextState, isFinal: !hasChanged})
 
       // Stops reel spinning if we've hit the final state's value
@@ -39,9 +44,10 @@ var SlotMachine = React.createClass({
         return; 
       }
       currentState = this.state.slotPositions;
-      setTimeout(makeSpin, 250); 
+      setTimeout(makeSpin, 100); 
       count++; 
     }.bind(this);
+
 
     // Actually spin
     makeSpin();
@@ -52,14 +58,16 @@ var SlotMachine = React.createClass({
     var sp = this.state.slotPositions;
     var isWinning = (sp[0] == sp[1]) && (sp[1] == sp[2]);
 
-    // Make sure winner and winnerClass strings are undefined until there's an actual win
+    // Make sure winner, winnerClass, and winnerImage strings are undefined until there's an actual win
     var winner = ""; 
     var winnerClass = "";
+    var winnerImage = "";
 
     // Make sure we're only displaying the win state on final slot positions
     if(isWinning && this.state.isFinal){
-      winner = ["You won a cup of coffee!", "You won a cup of tea!", "You won an espresso!"][sp[0]];
+      winner = [<h2>You've won a cup of coffee!</h2>, <h2>You've won a cup of tea!</h2>, <h2>You've won an espresso!</h2>][sp[0]];
       winnerClass = [" coffee", " tea", " espresso"][sp[0]];
+      winnerImage = [<div id="coffee-img" className="tossing"></div>, <div id="tea-img" className="tossing"></div>, <div id="espresso-img" className="tossing"></div>][sp[0]];
     }
 
     // Render Machine
@@ -124,13 +132,14 @@ var SpinButton = React.createClass({
 // StatusMessage is where success messages are output
 var StatusMessage = React.createClass({
   render: function(){
-    // This is some jQuery to make winning more exciting by adding some neat body classes 
-    // Revisit if there's time
-    // $('body').addClass(this.props.winnerClass);
-    
     return (
-      <div className={"col-md-12" + this.props.winnerClass}>
-        <h2>{this.props.winner}</h2>
+      <div className={"row" + this.props.winnerClass}>
+        <div className="col-md-4">
+          {this.props.winnerImage}
+        </div>
+        <div className="col-md-8">
+          {this.props.winner}
+        </div>
       </div>
     )
   }
