@@ -10,64 +10,35 @@
 }
 .slide {
   background-size: cover;
+  background-repeat: repeat-y;
   height: 250px;
 }
 /* Slot Styles */
 .slot {
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
+  -webkit-transition: all 250ms ease;
+  transition: all 250ms ease;
 }
-.slot-one {
-  .slide-one{
-    @extend .slide;
-    background-image: url("../images/slot1-slide1.png");
-  }
-  .slide-two{
-    @extend .slide;
-    background-image: url("../images/slot1-slide2.png");
-  }
-  .slide-three{
-    @extend .slide;
-    background-image: url("../images/slot1-slide3.png");
-  }
+.slot-one{
+  @extend .slide;
+  background-image: url("../images/slot1.png");
 }
-.slot-two {
-  .slide-one{
-    @extend .slide;
-    background-image: url("../images/slot2-slide1.png");
-  }
-  .slide-two{
-    @extend .slide;
-    background-image: url("../images/slot2-slide2.png");
-  }
-  .slide-three{
-    @extend .slide;
-    background-image: url("../images/slot2-slide3.png");
-  }
+.slot-two{
+  @extend .slide;
+  background-image: url("../images/slot2.png");
 }
-.slot-three { 
-  .slide-one{
-    @extend .slide;
-    background-image: url("../images/slot3-slide1.png");
-  }
-  .slide-two{
-    @extend .slide;
-     background-image: url("../images/slot3-slide2.png");
-  }
-  .slide-three{
-    @extend .slide;
-    background-image: url("../images/slot3-slide3.png");
-  }
+.slot-three{
+  @extend .slide;
+  background-image: url("../images/slot3.png");
 }
 /* Slide Positions */
 .position-0 {
-  margin-top: 0%
+  background-position: 0% 100%;
 }
 .position-1 {
-  margin-top: -70%;
+  background-position: 0% 199%;
 }
 .position-2 {
-  margin-top: -138%;
+  background-position: 0% 295%;
 }
 /* Spin Button */
 .spin{

@@ -1,7 +1,7 @@
 //This is the container for the slot machine (probably only one of these)
 var SlotMachine = React.createClass({
   getInitialState: function() {
-    return {slotPosition: [0,1,2]};
+    return {slotPositions: [0,1,2]};
   },
   handleButtonClick: function() {
     function genSlotValue(){
@@ -9,17 +9,42 @@ var SlotMachine = React.createClass({
     }
     //Set count to 0 before each button press
     var count = 0;
+    //YOUR DENSITY
+    var finalState = [genSlotValue(), genSlotValue(), genSlotValue() ];
+    //Spinning happens here
     var makeSpin = function(){
-      this.setState({slotPosition: [genSlotValue(), genSlotValue(), genSlotValue() ]})
-      //Spin 10 times
-      if(count < 10) { setTimeout(makeSpin, 250); count++; }
+      var currentState = this.state.slotPositions;
+      var nextState = currentState;
+      var hasChanged = false;
+      //Evaluate whether or not slots are on their final destination
+      if(count < 9 || currentState[0] != finalState[0]){
+        nextState[0] = (currentState[0]+1)%3;
+        hasChanged = true;
+      }if(count < 9 || currentState[1] != finalState[1]){
+        nextState[1] = (currentState[1]+1)%3;
+        hasChanged = true;
+      }if(count < 9 || currentState[2] != finalState[2]){
+        nextState[2] = (currentState[2]+1)%3;
+        hasChanged = true;
+      }
+      
+      if(!hasChanged) {
+        return; 
+      }
+      this.setState({slotPositions: nextState})
+      //if(count < 10) { setTimeout(makeSpin, 250); count++; console.log(this.state.slotPositions) }
+
+      setTimeout(makeSpin, 250); 
+      count++; 
+      console.log(this.state.slotPositions)
+      //After (count >= 10) {this.setState({slotPositions: [()]})}
     }.bind(this);
     //Actually spin
     makeSpin();
   },
   render: function() {
     //Define winning states
-    var sp = this.state.slotPosition;
+    var sp = this.state.slotPositions;
     var isWinning = (sp[0] == sp[1]) && (sp[1] == sp[2]);
     var winner = ""; 
     if(isWinning){
@@ -30,7 +55,7 @@ var SlotMachine = React.createClass({
     return (
       <div>
         <div className="machine row">
-          <Slots slotPosition={this.state.slotPosition} />
+          <Slots slotPositions={this.state.slotPositions} />
           <div className="spin row">
             <SpinButton onButtonClick={this.handleButtonClick} />
           </div>
@@ -47,27 +72,20 @@ var Slots = React.createClass({
   render: function() {
     return (
       <div className="slot-container row">
-        <Slot slotIndex="one" slotPosition={this.props.slotPosition[0]} />
-        <Slot slotIndex="two" slotPosition={this.props.slotPosition[1]} />
-        <Slot slotIndex="three" slotPosition={this.props.slotPosition[2]} />
+        <Slot slotIndex="one" slotPositions={this.props.slotPositions[0]} />
+        <Slot slotIndex="two" slotPositions={this.props.slotPositions[1]} />
+        <Slot slotIndex="three" slotPositions={this.props.slotPositions[2]} />
       </div>
     );
   }
 });
 //Creates each slot
-//Make h2 an image 
 var Slot = React.createClass({
   render: function() {
     return (
       <div className="col-xs-4">
         <div className="slot-reel"> 
-          <div className={"slot slot-"+this.props.slotIndex+" position-"+this.props.slotPosition}>
-            <div className="slide-one">
-            </div>
-            <div className="slide-two">
-            </div>
-            <div className="slide-three">
-            </div>
+          <div className={"slot slot-"+this.props.slotIndex+" position-"+this.props.slotPositions}>
           </div>
         </div>
       </div>

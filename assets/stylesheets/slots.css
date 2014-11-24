@@ -8,45 +8,34 @@
   width: auto;
   overflow: hidden; }
 
-.slide, .slot-one .slide-one, .slot-one .slide-two, .slot-one .slide-three, .slot-two .slide-one, .slot-two .slide-two, .slot-two .slide-three, .slot-three .slide-one, .slot-three .slide-two, .slot-three .slide-three {
+.slide, .slot-one, .slot-two, .slot-three {
   background-size: cover;
+  background-repeat: repeat-y;
   height: 250px; }
 
 /* Slot Styles */
 .slot {
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out; }
+  -webkit-transition: all 250ms ease;
+  transition: all 250ms ease; }
 
-.slot-one .slide-one {
-  background-image: url("../images/slot1-slide1.png"); }
-.slot-one .slide-two {
-  background-image: url("../images/slot1-slide2.png"); }
-.slot-one .slide-three {
-  background-image: url("../images/slot1-slide3.png"); }
+.slot-one {
+  background-image: url("../images/slot1.png"); }
 
-.slot-two .slide-one {
-  background-image: url("../images/slot2-slide1.png"); }
-.slot-two .slide-two {
-  background-image: url("../images/slot2-slide2.png"); }
-.slot-two .slide-three {
-  background-image: url("../images/slot2-slide3.png"); }
+.slot-two {
+  background-image: url("../images/slot2.png"); }
 
-.slot-three .slide-one {
-  background-image: url("../images/slot3-slide1.png"); }
-.slot-three .slide-two {
-  background-image: url("../images/slot3-slide2.png"); }
-.slot-three .slide-three {
-  background-image: url("../images/slot3-slide3.png"); }
+.slot-three {
+  background-image: url("../images/slot3.png"); }
 
 /* Slide Positions */
 .position-0 {
-  margin-top: 0%; }
+  background-position: 0% 100%; }
 
 .position-1 {
-  margin-top: -70%; }
+  background-position: 0% 199%; }
 
 .position-2 {
-  margin-top: -138%; }
+  background-position: 0% 295%; }
 
 /* Spin Button */
 .spin {
