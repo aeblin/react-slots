@@ -2,5 +2,6 @@
 .DS_Store
 
 # ignore sass cache for now
-**/.sass-cache
+**assets/stylesheets/.sass-cache
+**assets/stylesheets/.sass-cache/*
 **/.sass-cache/*
