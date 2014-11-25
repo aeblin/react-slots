@@ -15,3 +15,6 @@ index.html is mostly comprised of includes for react and css. Save for the <head
 lives in <section id="content">
 
 app.js contains the render() calls for the virtual dom as well as logic for random slot state generation, and win states.
+
+## Bragging
+The slot icons and win state icons were drawn up with a touch-pad in Illustrator. ...I should buy a new a pen for my Wacom tablet.
